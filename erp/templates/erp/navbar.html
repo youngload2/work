@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">ERP</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/coa/">coa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/product/">product</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/api/coa/">coa_api</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/api/product/">product_api</a>
+            </li>
+            {% endif %}
+        </ul>
+        <ui class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="#">{{ request.user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/logout/">로그아웃</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/signup/">회원가입</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/login/">로그인</a>
+            </li>
+            {% endif %}
+        </ui>
+    </div>
+</nav>

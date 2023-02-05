@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Coa</title>
+    <link href="./bootstrap4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+{% include 'erp/navbar.html' %}
+<div class="container">
+    <div class="row">
+        <h1>Coa</h1>
+
+        <hr/>
+        {% if user.is_authenticated %}
+        <h1><a href="{% url 'coa_create' %}">+</a></h1>
+        {% endif %}
+    </div>
+    
+    <div class="container my-3">
+        {% if coa_list %}
+        <table class="table">
+            <thead>
+                <tr class="thead-dark">
+                    <th>코드</th>
+                    <th>계정명</th>
+                    <th>계정 대분류</th>
+                    <th>계정 중분류</th>
+                    <th>계정 소분류</th>
+                    <th>재무제표</th>
+                    <th>비고</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in coa_list %}
+                <tr>
+                    <td><a href="{{ p.get_coa_url }}">{{ p.code }}</a></td>
+                    <td>{{ p.user_name }}</td>
+                    <td>{{ p.category_L }}</td>
+                    <td>{{ p.category_M }}</td>
+                    <td>{{ p.category_S }}</td>
+                    <td>{{ p.financial_statement }}</td>
+                    <td>{{ p.note }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="/coa/?page=1"
+                    tabindex="-1">처음으로</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                    tabindex="-1">이전</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">처음으로</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">이전</a>
+            </li>
+            {% endif %}
+
+            {% for page in page_range %}
+            <li class="page-item {% if page == page_obj.number %} activate {% endif %}">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            {% endfor %}
+
+            <!-- {% if page == page_obj.number %}
+            <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">{{ page</div></li>
+            {% else %}
+            <li><a class="page-link text-primary d-inline-block" href="?page={{ page }}">{{ page }}</a></li>
+            {% endif %} -->
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{ page_obj.next_page_number }}">다음</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{ page_obj.paginator.num_pages }}">끝으로</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">다음</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#">끝으로</a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+        {% else %}
+        <h1>테이블이 없습니다.</h1>
+        {% endif %}
+    </div>
+    
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script></body>
+</body>
+</html>

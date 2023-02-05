@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <link href="./bootstrap4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    {% include 'erp/navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <h1>{{ product.product_code }} - Product</h1>
+
+            {% if user.is_authenticated %}
+            <h1><a href="/product/">목록으로</a></h1>
+            <hr/>
+            <h1><a href="/product/{{ product.pk }}/update/">수정</a></h1>
+            <h1><a href="/product/{{ product.pk }}/delete/" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></h1>
+            {% endif %}
+        </div>
+        
+        <hr/>
+        <h3>{{ product.product_code }}</h3>
+        <h3>{{ product.product_name }}</h3>
+        <h3>{{ product.package_unit }}</h3>
+        <h3>{{ product.pharmacist }}</h3>
+        <h3>{{ product.insurance_code }}</h3>
+        <h3>{{ product.standard_code }}</h3>
+        <h3>{{ product.base_price }}</h3>
+        <h3>{{ product.pay }}</h3>
+        <h3>{{ product.division }}</h3>
+        <h3>{{ product.ingredient_code }}</h3>
+    </div>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script></body>
+</body>
+</html>
